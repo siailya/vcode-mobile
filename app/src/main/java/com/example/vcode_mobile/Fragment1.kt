@@ -31,10 +31,14 @@ class Fragment1 : Fragment() {
     private fun getCalendarData(year: Int, month: Int): Array<Array<Pair<Boolean, Int>>> {
         val initialDate: LocalDate = LocalDate.of(year, month, 1)
 
-        val response: Array<Array<Pair<Boolean, Int>>> = Array(5)
-            { Array(7) { Pair(false, 0) } }
-        var tmp: LocalDate = LocalDate.from(initialDate)
+        var weekCount = 0
+        val date = initialDate.minusDays((initialDate.dayOfWeek.value - 1).toLong())
+        while (date.plusWeeks(weekCount.toLong()).monthValue <= initialDate.monthValue) weekCount++;
 
+        val response: Array<Array<Pair<Boolean, Int>>> = Array(weekCount)
+        { Array(7) { Pair(false, 0) } }
+
+        var tmp: LocalDate = LocalDate.from(initialDate)
         for ((row, week) in response.withIndex())
             for ((column, _) in week.withIndex()) {
                 if (row == 0 && initialDate.dayOfWeek.value > column + 1)
