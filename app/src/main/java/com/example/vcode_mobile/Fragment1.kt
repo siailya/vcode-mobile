@@ -30,14 +30,15 @@ class Fragment1 : Fragment() {
 
         for ((row, week) in response.withIndex())
             for ((column, date) in week.withIndex()) {
-                if (row == 0 && initialDate.dayOfWeek.value != column + 1)
+                if (row == 0 && initialDate.dayOfWeek.value > column + 1)
                     response[row][column] = Pair(
                         false,
-                        initialDate.minusDays((initialDate.dayOfWeek.value - column).toLong()).dayOfMonth
+                        initialDate.minusDays((initialDate.dayOfWeek.value - column - 1).toLong()).dayOfMonth
                     )
-                else
-                    response[row][column] = Pair(tmp.month == initialDate.month, initialDate.dayOfMonth)
-                tmp = tmp.plusDays(1)
+                else {
+                    response[row][column] = Pair(tmp.month == initialDate.month, tmp.dayOfMonth)
+                    tmp = tmp.plusDays(1)
+                }
             }
         return response
     }
