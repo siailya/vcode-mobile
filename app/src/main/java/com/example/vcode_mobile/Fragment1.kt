@@ -52,7 +52,7 @@ class Fragment1 : Fragment() {
 
     private var month: Int = 0
     private var year: Int = 0
-    private var calendar: Any? = null
+    private var calendar: Array<Array<Pair<Boolean, Int>>>? = null
 
     fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
         val formatter = SimpleDateFormat(format, locale)
@@ -89,14 +89,15 @@ class Fragment1 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val buttons = ArrayList<Button>()
-        var table: TableLayout = view.findViewById(R.id.buttonsTable)
-        for (i in 0 until table.childCount) {
+        val table: TableLayout = view.findViewById(R.id.buttonsTable)
+        for (i in 1 until table.childCount) {
             val row: TableRow = table.getChildAt(i) as TableRow
             for (j in 0 until row.childCount) {
                 val b: Button = row.getChildAt(j) as Button
                 buttons.add(b)
+                b.isEnabled = calendar!![i - 1][j].first
+                b.text = calendar!![i - 1][j].second.toString()
             }
-//            buttons[i].setOnClickListener(buttonclicked)
         }
     }
 
