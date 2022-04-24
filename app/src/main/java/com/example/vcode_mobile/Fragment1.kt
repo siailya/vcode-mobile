@@ -7,7 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TableLayout
+import android.widget.TableRow
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBar
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
@@ -86,10 +89,13 @@ class Fragment1 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val buttons = ArrayList<Button>()
-        for (i in 0..34) {
-            val idString = "@+id/button$i"
-            val buttonID = view.resources.getIdentifier(idString, "id", "fragment1")
-            buttons.add(view.findViewById<Button>(buttonID))
+        var table: TableLayout = view.findViewById(R.id.buttonsTable)
+        for (i in 0 until table.childCount) {
+            val row: TableRow = table.getChildAt(i) as TableRow
+            for (j in 0 until row.childCount) {
+                val b: Button = row.getChildAt(j) as Button
+                buttons.add(b)
+            }
 //            buttons[i].setOnClickListener(buttonclicked)
         }
     }
