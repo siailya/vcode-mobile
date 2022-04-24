@@ -2,6 +2,7 @@ package com.example.vcode_mobile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import androidx.viewpager.widget.ViewPager
 
 import androidx.fragment.app.Fragment
@@ -106,7 +107,6 @@ class PageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 }
 
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
@@ -116,5 +116,6 @@ class MainActivity : AppCompatActivity() {
 
         val tabLayout = findViewById<TabLayout>(R.id.tabLayout)
         tabLayout.setupWithViewPager(viewPager)
+
     }
 }
