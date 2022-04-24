@@ -23,7 +23,7 @@ private const val YEAR = "year"
  * Use the [Fragment1.newInstance] factory method to
  * create an instance of this fragment.
  */
-public final class Fragment1 : Fragment() {
+class Fragment1 : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun getCalendarData(year: Int, month: Int): Array<Array<Pair<Boolean, Int>>> {
         val initialDate: LocalDate = LocalDate.of(year, month, 1)
@@ -33,7 +33,7 @@ public final class Fragment1 : Fragment() {
         var tmp: LocalDate = LocalDate.from(initialDate)
 
         for ((row, week) in response.withIndex())
-            for ((column, date) in week.withIndex()) {
+            for ((column, _) in week.withIndex()) {
                 if (row == 0 && initialDate.dayOfWeek.value > column + 1)
                     response[row][column] = Pair(
                         false,
