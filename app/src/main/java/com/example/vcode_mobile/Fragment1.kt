@@ -29,7 +29,7 @@ class Fragment1 : Fragment() {
         var tmp: LocalDate = LocalDate.from(initialDate)
 
         for ((row, week) in response.withIndex())
-            for ((column, date) in week.withIndex()) {
+            for ((column, _) in week.withIndex()) {
                 if (row == 0 && initialDate.dayOfWeek.value > column + 1)
                     response[row][column] = Pair(
                         false,
@@ -54,7 +54,6 @@ class Fragment1 : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-        getCalendarData(2022, 4)
     }
 
     override fun onCreateView(
