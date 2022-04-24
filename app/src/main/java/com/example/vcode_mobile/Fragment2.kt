@@ -1,5 +1,6 @@
 package com.example.vcode_mobile
 
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -89,6 +90,9 @@ class Fragment2 : Fragment() {
         return inflater.inflate(R.layout.fragment_2, container, false)
     }
 
+    private var periodStart: Any? = null
+    private var periodEnd: Any? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -101,6 +105,37 @@ class Fragment2 : Fragment() {
                 buttons.add(b)
                 b.isEnabled = calendar!![i - 1][j].first
                 b.text = calendar!![i - 1][j].second.toString()
+
+                b.setOnClickListener {
+                    if (periodStart == null) {
+                        periodStart = (b.text as String).toInt()
+                        b.setBackgroundColor(Color.MAGENTA)
+                    } else if (periodEnd == null) {
+                        periodEnd = (b.text as String).toInt()
+
+                        if ((periodEnd as Int) < (periodStart as Int)) {
+                            periodStart = periodStart.also {periodStart = periodEnd}
+                        }
+
+                        b.setBackgroundColor(Color.MAGENTA)
+
+                        for (btn in buttons) {
+                            if ((btn.text as String).toInt() < (periodEnd as Int) &&
+                                (btn.text as String).toInt() > (periodStart as Int)
+                            ) {
+                                btn.setBackgroundColor(Color.MAGENTA)
+                            }
+                        }
+                    } else {
+                        periodStart = null
+                        periodEnd = null
+                        for (btn in buttons) {
+                            if (b.isEnabled) {
+                                btn.setBackgroundColor(Color.rgb(98, 0, 238))
+                            }
+                        }
+                    }
+                }
             }
         }
     }
