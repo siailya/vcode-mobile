@@ -87,7 +87,7 @@ class Fragment1 : Fragment() {
 
         val buttons = ArrayList<Button>()
         for (i in 0..34) {
-            val idString = "button$i"
+            val idString = "@+id/button$i"
             val buttonID = view.resources.getIdentifier(idString, "id", "fragment1")
             buttons.add(view.findViewById<Button>(buttonID))
 //            buttons[i].setOnClickListener(buttonclicked)
